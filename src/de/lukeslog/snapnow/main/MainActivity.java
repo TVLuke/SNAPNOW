@@ -48,12 +48,16 @@ public class MainActivity extends Activity
         ctx=this;
         prefs = getSharedPreferences(SnapNowConstants.PREFS, 0);
 
+        //Set the strings I need
+        String seconds = getResources().getString(R.string.seconds);
+        String missed = getResources().getString(R.string.missed);
+        
         TextView runtime = (TextView) findViewById(R.id.runtime);
-        runtime.setText(""+Statistics.runtimeInSeconds(this)+" seconds");
+        runtime.setText(""+Statistics.runtimeInSeconds(this)+" "+seconds+"");
         TextView alerts = (TextView) findViewById(R.id.alerts);
-        alerts.setText(""+Statistics.sumofallerts(this)+" ("+Statistics.sumoffails(this)+" missed)");
+        alerts.setText(""+Statistics.sumofallerts(this)+" ("+Statistics.sumoffails(this)+" "+missed+")");
         TextView tsl = (TextView) findViewById(R.id.tsl);
-        tsl.setText(Statistics.timesincelastalert(this)+" seconds");
+        tsl.setText(Statistics.timesincelastalert(this)+" "+seconds+"");
         ComponentName a = getCallingActivity();
         if(a!=null)
         {
@@ -233,7 +237,8 @@ public class MainActivity extends Activity
     }
 	
     @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
+    public boolean onCreateOptionsMenu(Menu menu) 
+    {
         MenuInflater inflater = getMenuInflater();
         inflater.inflate(R.menu.main_menu, menu);
         return true;
@@ -334,6 +339,12 @@ public class MainActivity extends Activity
     	private Handler handler = new Handler();
     	public static final int delay= 1000;
 		
+        String seconds = getResources().getString(R.string.seconds);
+        String missed = getResources().getString(R.string.missed);
+        String active = getResources().getString(R.string.active);
+        String ago = getResources().getString(R.string.ago);
+        
+        
     	@Override
 		public void run() 
     	{
@@ -355,16 +366,16 @@ public class MainActivity extends Activity
     	    long dif = now-firststart;
     	    double dif2=dif/1000;
     	    int difvalue=(int)dif2;
-    	    String [] difarray = Statistics.generateRightTimeUnit(difvalue);
+    	    String [] difarray = Statistics.generateRightTimeUnit(difvalue, ctx);
  
-    	    String[] tslaString = Statistics.generateRightTimeUnit(Statistics.timesincelastalert(ctx));
+    	    String[] tslaString = Statistics.generateRightTimeUnit(Statistics.timesincelastalert(ctx), ctx);
 
     	    double rt2 = (double) rt;
     	    double nx = rt2/(dif2/100);
     	    int nx2 = (int) (nx*100);
     	    double nx2b = (double) nx2;
     	    double nx3 = nx2b/100;
-    	    String [] difarray2 = Statistics.generateRightTimeUnit(Statistics.runtimeInSeconds(ctx));
+    	    String [] difarray2 = Statistics.generateRightTimeUnit(Statistics.runtimeInSeconds(ctx), ctx);
 
     	    long [] rtis = Statistics.runtimeInSecondsMonth(ctx, d.getTime());
     	    double r1 = rtis[0];
@@ -377,12 +388,12 @@ public class MainActivity extends Activity
     	    
     	    //set Textviews
     	    version.setText(SnapNowConstants.VERSION);
-       		firstactive.setText((f.getYear()+1900)+"-"+(f.getMonth()+1)+"-"+f.getDate()+" ( "+difarray[0]+" "+difarray[1]+" ago)");
-    	    runtime.setText(""+difarray2[0]+" "+difarray2[1]+" ("+nx3+" % active)");
-    	    alerts.setText(""+Statistics.sumofallerts(ctx)+" ("+Statistics.sumoffails(ctx)+" missed)");
+       		firstactive.setText((f.getYear()+1900)+"-"+(f.getMonth()+1)+"-"+f.getDate()+" ( "+difarray[0]+" "+difarray[1]+" "+ago+")");
+    	    runtime.setText(""+difarray2[0]+" "+difarray2[1]+" ("+nx3+" % "+active +")");
+    	    alerts.setText(""+Statistics.sumofallerts(ctx)+" ("+Statistics.sumoffails(ctx)+" "+missed+")");
     	    tsl.setText( tslaString[0]+" "+tslaString[1]);
     	    monthruntime.setText(upmonth2+"%");
-    	    monthalerts.setText(""+Statistics.sumofallertsMonth(ctx,  d.getTime())+" ("+Statistics.sumoffailsMonth(ctx, d.getTime())+" missed)");
+    	    monthalerts.setText(""+Statistics.sumofallertsMonth(ctx,  d.getTime())+" ("+Statistics.sumoffailsMonth(ctx, d.getTime())+" "+missed+")");
     	    
 
 	        handler.removeCallbacks(this); // remove the old callback

@@ -27,7 +27,7 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name="de.lukeslog.snapnow.main.SnapNowActivity" android:theme="@style/Theme.Transparent"></activity>
+        <activity android:name="de.lukeslog.snapnow.main.SnapNowActivity" android:theme="@style/Theme.Transparent" android:screenOrientation="landscape" android:configChanges="orientation|keyboardHidden"></activity>
         <activity android:name="de.lukeslog.posting.PostToTumblr">
         	<intent-filter>
                 <action android:name="android.intent.action.VIEW"/>

@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 
+import de.lukeslog.snapnow.R;
 import de.lukeslog.snapnow.actors.NotificationActor;
 import de.lukeslog.snapnow.constants.SnapNowConstants;
 import de.lukeslog.snapnow.database.EntryDatabase;
@@ -384,56 +385,58 @@ public class SnapNowBackgroundService  extends IntentService
 	
 	private void generateSumationEntry(int i)
 	{
+		String thismonth = getResources().getString(R.string.thismonth);
+		String statsforthemonthof = getResources().getString(R.string.statsforthemonthof);
 		String stats="";
-		stats=stats+"Stats for the month of ";
+		stats=stats+""+statsforthemonthof+" ";
 		Date d = new Date();
 		if(i==0)
 		{
-			stats = stats+"January\n";
+			stats = stats+getResources().getString(R.string.january)+"\n";
 		}
 		if(i==1)
 		{
-			stats = stats+"February\n";				
+			stats = stats+getResources().getString(R.string.february)+"\n";				
 		}
 		if(i==2)
 		{
-			stats = stats+"March\n";
+			stats = stats+getResources().getString(R.string.march)+"\n";
 		}
 		if(i==3)
 		{
-			stats = stats+"April\n";				
+			stats = stats+getResources().getString(R.string.april)+"\n";				
 		}
 		if(i==4)
 		{
-			stats = stats+"May\n";
+			stats = stats+getResources().getString(R.string.may)+"\n";
 		}
 		if(i==5)
 		{
-			stats = stats+"June\n";
+			stats = stats+getResources().getString(R.string.june)+"\n";
 		}
 		if(i==6)
 		{
-			stats = stats+"July\n";
+			stats = stats+getResources().getString(R.string.july)+"\n";
 		}
 		if(i==7)
 		{
-			stats = stats+"August\n";				
+			stats = stats+getResources().getString(R.string.august)+"\n";				
 		}
 		if(i==8)
 		{
-			stats = stats+"September\n";				
+			stats = stats+getResources().getString(R.string.september)+"\n";				
 		}
 		if(i==9)
 		{
-			stats = stats+"October\n";
+			stats = stats+getResources().getString(R.string.october)+"\n";
 		}
 		if(i==10)
 		{
-			stats = stats+"November\n";
+			stats = stats+getResources().getString(R.string.november)+"\n";
 		}
 		if(i==11)
 		{
-			stats = stats+"December\n";
+			stats = stats+getResources().getString(R.string.december)+"\n";
 		}
 		long firststart = Statistics.getTimeOfFirstActivation(this);
 		Date f = new Date(firststart);
@@ -441,17 +444,17 @@ public class SnapNowBackgroundService  extends IntentService
 	    long dif = now-firststart;
 	    double dif2=dif/1000;
 	    int difvalue=(int)dif2;
-	    String [] difarray = Statistics.generateRightTimeUnit(difvalue);		
+	    String [] difarray = Statistics.generateRightTimeUnit(difvalue, this);		
 		stats = stats+"\n";
-		stats = stats+"You are currently running SNAPNOW version "+SnapNowConstants.VERSION+"\n";
-		stats = stats+"You started this project on "+(f.getYear()+1900)+"-"+(f.getMonth()+1)+"-"+f.getDate()+", "+difarray[0]+" "+difarray[1]+" ago.\n \n";
-		stats = stats+"Overall runtime: "+Statistics.runtimeInSeconds(this)+" seconds. \n";
-		stats = stats+"Overall cought moments: "+(Statistics.sumofallerts(this)-Statistics.sumoffails(this))+".\n \n";
+		stats = stats+""+getResources().getString(R.string.currentlyrunningversion)+" "+SnapNowConstants.VERSION+"\n";
+		stats = stats+""+getResources().getString(R.string.istartedthison)+" "+(f.getYear()+1900)+"-"+(f.getMonth()+1)+"-"+f.getDate()+", "+difarray[0]+" "+difarray[1]+" "+getResources().getString(R.string.ago)+".\n \n";
+		stats = stats+""+getResources().getString(R.string.overallruntime)+": "+Statistics.runtimeInSeconds(this)+" "+getResources().getString(R.string.seconds)+". \n";
+		stats = stats+""+getResources().getString(R.string.overallcought)+": "+(Statistics.sumofallerts(this)-Statistics.sumoffails(this))+".\n \n";
 		
 	    long [] rtis = Statistics.runtimeInSecondsMonth(this, d.getTime()-100000);
 	    double r1 = rtis[0];
 	    int r1i = (int)r1;
-	    String [] difarray2 = Statistics.generateRightTimeUnit(r1i);
+	    String [] difarray2 = Statistics.generateRightTimeUnit(r1i, this);
 	    double r2 = rtis[1];
 	    double upmonth = r1/(r2/100); 
 	    double upmonth2 = upmonth*100;
@@ -459,11 +462,11 @@ public class SnapNowBackgroundService  extends IntentService
 	    upmonth2 = upmonth3;
 	    upmonth2 = upmonth2/100;
 	    
-		stats = stats+"<b>This Month</b>\n";
-		stats = stats+"Runntime: "+difarray2[0]+" "+difarray2[1]+" ("+upmonth2+"%)\n";
-		stats = stats+"You cought "+(Statistics.sumofallertsMonth(this,  d.getTime())-Statistics.sumoffailsMonth(this, d.getTime()))+" of "+Statistics.sumofallertsMonth(this, d.getTime())+" moments this month.\n";
+		stats = stats+"<b>"+thismonth+"</b>\n";
+		stats = stats+""+getResources().getString(R.string.runtime)+": "+difarray2[0]+" "+difarray2[1]+" ("+upmonth2+"%)\n";
+		stats=stats+String.format(getResources().getString(R.string.coughtofmoments), ""+(Statistics.sumofallertsMonth(this,  d.getTime())-Statistics.sumoffailsMonth(this, d.getTime())), ""+Statistics.sumofallertsMonth(this, d.getTime()))+"\n";
 		
-		TextEntry entry = new TextEntry("Month End Statistics", stats, this);
+		TextEntry entry = new TextEntry(getResources().getString(R.string.monthendstats), stats, this);
 		SnapNowBackgroundService.addEntry(entry);
 	}
 

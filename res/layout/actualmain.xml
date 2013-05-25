@@ -20,7 +20,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:background="#004b5a"
-                android:text="Stats"
+                android:text="@string/stats"
                 android:textAppearance="?android:attr/textAppearanceMedium" />
 
 			<LinearLayout
@@ -31,7 +31,7 @@
 			        android:id="@+id/textView5r"
 			        android:layout_width="wrap_content"
 			        android:layout_height="wrap_content"
-			        android:text="Version:  " />
+			        android:text="@string/version" />
 
 			    <TextView
 			        android:id="@+id/versionnumber"
@@ -49,7 +49,7 @@
 			        android:id="@+id/textView5d"
 			        android:layout_width="wrap_content"
 			        android:layout_height="wrap_content"
-			        android:text="First Activation:  " />
+			        android:text="@string/firstactivation" />
 
 			    <TextView
 			        android:id="@+id/firstactive"
@@ -67,7 +67,7 @@
 			        android:id="@+id/textView5"
 			        android:layout_width="wrap_content"
 			        android:layout_height="wrap_content"
-			        android:text="Runtime:  " />
+			        android:text="@string/runtime" />
 
 			    <TextView
 			        android:id="@+id/runtime"
@@ -85,7 +85,7 @@
 			        android:id="@+id/textView5"
 			        android:layout_width="wrap_content"
 			        android:layout_height="wrap_content"
-			        android:text="Alerts:  " />
+			        android:text="@string/alerts" />
 
 			    <TextView
 			        android:id="@+id/alerts"
@@ -103,7 +103,7 @@
 			        android:id="@+id/textView5"
 			        android:layout_width="wrap_content"
 			        android:layout_height="wrap_content"
-			        android:text="Time Since last Alert:  " />
+			        android:text="@string/timesincelast" />
 
 			    <TextView
 			        android:id="@+id/tsl"
@@ -120,7 +120,7 @@
 			        android:id="@+id/textView5"
 			        android:layout_width="wrap_content"
 			        android:layout_height="wrap_content"
-			        android:text="This Month:  " />
+			        android:text="@string/thismonth" />
 
 			    <TextView
 			        android:id="@+id/notext"
@@ -168,14 +168,14 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:background="#004b5a"
-                android:text="Settings"
+                android:text="@string/settings"
                 android:textAppearance="?android:attr/textAppearanceMedium" />
             
 			<CheckBox
                 android:id="@+id/onlywificheckbox"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Only upload pics in wifi" 
+                android:text="@string/onlyuploadinwifitext" 
                 android:textColor="@android:color/black"/>
 			
             <TextView
@@ -183,7 +183,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:background="#004b5a"
-                android:text="Google"
+                android:text="@string/google"
                 android:textAppearance="?android:attr/textAppearanceMedium" />
 
             <TextView
@@ -191,7 +191,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:textColor="@android:color/black"
-                android:text="Google Username" />
+                android:text="@string/googleusername" />
 
 
 
@@ -205,7 +205,7 @@
                 android:id="@+id/TextView03"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Google Password"
+                android:text="@string/googlepass"
                 android:textColor="@android:color/black" />
 
             <EditText
@@ -222,14 +222,14 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:background="#004b5a"
-                android:text="Tumblr"
+                android:text="@string/tumblr"
                 android:textAppearance="?android:attr/textAppearanceMedium" />
 
             <CheckBox
                 android:id="@+id/tumblrBox"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Send Pics To Tumblr" 
+                android:text="@string/sendpicstotumblr" 
                 android:textColor="@android:color/black"/>
 
             <LinearLayout
@@ -240,7 +240,7 @@
                     android:id="@+id/textView2"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Tumblr Post Mail "
+                    android:text="@string/tumblrmail"
                     android:textColor="@android:color/black" />
 
                 <TextView
@@ -248,7 +248,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:textColor="#0000FF" 
-                    android:text="(learn more)" />
+                    android:text="@string/learnmore" />
 
             </LinearLayout>
             
@@ -279,7 +279,7 @@
                     android:id="@+id/textView3"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="[at]tumblr.com"
+                    android:text="@string/attumbrcom"
                     android:textAppearance="?android:attr/textAppearanceLarge"
                     android:textColor="@android:color/black" />
             </LinearLayout>
@@ -289,14 +289,14 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:background="#004b5a"
-                android:text="Twitter"
+                android:text="@string/twitter"
                 android:textAppearance="?android:attr/textAppearanceMedium" />
 
             <CheckBox
                 android:id="@+id/twitterChackBox"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Send Pics To Twitter" 
+                android:text="@string/sendpicstotwitter" 
                 android:textColor="@android:color/black"/>
 		   
             <TextView
@@ -304,14 +304,14 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:background="#004b5a"
-                android:text="Send Via Email"
+                android:text="@string/sendviaemail"
                 android:textAppearance="?android:attr/textAppearanceMedium" />
 
             <CheckBox
                 android:id="@+id/sendviaEmailCheckbox"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Send Pics Via Email" 
+                android:text="@string/sendviaemail" 
                 android:textColor="@android:color/black"/>
                 
             <TextView
@@ -319,7 +319,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:textColor="@android:color/black"
-                android:text="Adresses (Sepperate with komma)" />
+                android:text="@string/adresses" />
 
             <EditText
                 android:id="@+id/emailadresses"

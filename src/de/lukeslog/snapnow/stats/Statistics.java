@@ -9,6 +9,7 @@ import android.content.SharedPreferences;
 import android.content.SharedPreferences.Editor;
 import android.os.IBinder;
 import android.util.Log;
+import de.lukeslog.snapnow.R;
 import de.lukeslog.snapnow.constants.SnapNowConstants;
 
 public class Statistics 
@@ -205,25 +206,29 @@ public class Statistics
 		editor.commit();
 	}
 	
-	public static String[] generateRightTimeUnit(long difvalue)
+	public static String[] generateRightTimeUnit(long difvalue, Context c)
 	{
 		//Log.d(TAG, "generate Right time unit for "+difvalue+" seconds");
-		String difunit="seconds";
+        String seconds = c.getResources().getString(R.string.seconds);
+        String minutes = c.getResources().getString(R.string.minutes);
+        String hours = c.getResources().getString(R.string.hours);
+        String days = c.getResources().getString(R.string.days);
+		String difunit=seconds;
 		long difvalue2=0;
    	    if(difvalue>=60 && difvalue<60*60)
    	    {
    	    	difvalue2=difvalue/60;
-   	    	difunit="minutes";
+   	    	difunit=minutes;
    	    }
    	    else if(difvalue>=60*60 && difvalue<24*60*60)
    	    {
    	    	difvalue2=difvalue/(60*60);
-   	    	difunit="hours";
+   	    	difunit=hours;
    	    }
    	    else if(difvalue>=24*60*60)
    	    {
    	    	difvalue2=difvalue/(24*60*60);
-   	    	difunit="days";
+   	    	difunit=days;
    	    }
 		//Log.d(TAG, "generate Right time unit for "+difvalue2+" "+difunit+"");
    	    String [] result = {""+difvalue2, difunit};

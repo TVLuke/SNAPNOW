@@ -10,7 +10,7 @@ public class SnapNowConstants
 	public static int RANDOMNUMBER=1440;
 	//public static int RANDOMNUMBER=6;
 	
-	public static String VERSION="0.0.2";
+	public static String VERSION="0.91";
 	
 	public static String DATABASE_NAME = "SnapNowDatabase";
 	public static final int DATABASE_VERSION=2;
