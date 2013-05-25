@@ -7,8 +7,8 @@ public class SnapNowConstants
 	public static final String PREFS = "SnapNowPrefs";
 	public static final int SNAPALARM = 5394; 
 	
-	//public static int RANDOMNUMBER=1440;
-	public static int RANDOMNUMBER=10;
+	public static int RANDOMNUMBER=1440;
+	//public static int RANDOMNUMBER=6;
 	
 	public static String VERSION="0.0.2";
 	

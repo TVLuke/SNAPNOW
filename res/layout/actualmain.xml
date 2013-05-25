@@ -39,7 +39,8 @@
 			        android:layout_height="wrap_content"
 			        android:text="" />
 			</LinearLayout>
-			
+			
+
 			<LinearLayout
 			    android:layout_width="match_parent"
 			    android:layout_height="wrap_content" >
@@ -56,7 +57,8 @@
 			        android:layout_height="wrap_content"
 			        android:text="" />
 			</LinearLayout>
-			
+			
+
 			<LinearLayout
 			    android:layout_width="match_parent"
 			    android:layout_height="wrap_content" >
@@ -73,7 +75,8 @@
 			        android:layout_height="wrap_content"
 			        android:text="" />
 			</LinearLayout>
-			
+			
+
 			<LinearLayout
 			    android:layout_width="match_parent"
 			    android:layout_height="wrap_content" >
@@ -90,7 +93,8 @@
 			        android:layout_height="wrap_content"
 			        android:text="" />
 			</LinearLayout>
-			
+			
+
 			<LinearLayout
 			    android:layout_width="match_parent"
 			    android:layout_height="wrap_content" >
@@ -188,7 +192,9 @@
                 android:layout_height="wrap_content"
                 android:textColor="@android:color/black"
                 android:text="Google Username" />
-
+
+
+
             <EditText
                 android:id="@+id/gmailacc"
                 android:layout_width="match_parent"
@@ -253,11 +259,13 @@
                 android:text=" "
                 android:textColor="#FF0000"
                 android:textAppearance="?android:attr/textAppearanceSmall" />
-
+
+
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content" >
-
+
+
                 <EditText
                     android:id="@+id/tumblrmail"
                     android:layout_width="164dp"
