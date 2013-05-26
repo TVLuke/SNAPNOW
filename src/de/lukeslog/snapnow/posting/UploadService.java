@@ -36,7 +36,7 @@ public class UploadService extends Service
 	public int onStartCommand(Intent intent, int flags, int startId) 
 	{
 		super.onStartCommand(intent, flags, startId);
-		ArrayList<Entry> entrys = SnapNowBackgroundService.getEntrys();
+		ArrayList<Entry> entrys = SnapNowBackgroundService.getUnuplodedEntrys();
 		Log.d(TAG, "Entrysize="+entrys.size());
 		for (int i=entrys.size()-1; i>=0; i--)
 		{
@@ -45,7 +45,6 @@ public class UploadService extends Service
 			entry.upload(this);
 	        prefs = getSharedPreferences(SnapNowConstants.PREFS, 0);
 		}
-    	SnapNowBackgroundService.cleanEntrys();
 		return Service.START_NOT_STICKY;
 	}
 }

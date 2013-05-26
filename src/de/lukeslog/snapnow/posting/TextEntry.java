@@ -7,29 +7,18 @@ public class TextEntry extends Entry
 {
 
 	String text;
-	String header;
-	
+
 	public TextEntry(String header, String text, Context ctx)
 	{
 		super(ctx);
 		addTag(Entry.TAG_TYPE, "text");
+		setHeader(header);
 		this.text=text;
-		this.header=header;
 	}
 	
 	public String getText()
 	{
 		return text;
-	}
-	
-	public String getHeader()
-	{
-		return header;
-	}
-	
-	public void setHeader(String h)
-	{
-		this.header=h;
 	}
 	
 	public void setText(String t)

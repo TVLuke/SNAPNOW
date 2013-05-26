@@ -1,5 +1,6 @@
 package de.lukeslog.snapnow.actors;
 
-public class UploadActor {
-
+public abstract class UploadActor
+{
+	
 }

@@ -74,15 +74,20 @@ public class PostToTumblrViaMail extends Service
 					Log.i(TAG, "Set From");
 					m.setFrom(gmailaccString);
 					Log.i(TAG, "setSubject");
-					int momentnumber= prefs.getInt("momentnumber", 0);
-					m.setSubject("Moment #"+momentnumber+" "+entry.dateAsAString());
+					String header=entry.getHeader();
+					Log.i(TAG, "Sending with herder="+header);
+					m.setSubject(header);
 					Log.i(TAG, "setBody");
 					String body="";
 					ArrayList<String> tags = entry.getTagsAsArrayList();
 					for(String tag: tags)
 					{
+						tag=tag.trim();
+						tag=tag.replace(" ", "");
+						tag=tag.replace(" ", "");
 						body = body+" #"+tag;
 					}
+					Log.i(TAG, "body"+body);
 					m.setBody(body);
 					try 
 					{
@@ -137,7 +142,9 @@ public class PostToTumblrViaMail extends Service
 				Log.i(TAG, "Set From");
 				m.setFrom(gmailaccString);
 				Log.i(TAG, "setSubject");
-				m.setSubject(((TextEntry) entry).getHeader());
+				String header=entry.getHeader();
+				Log.i(TAG, "Sending with herder="+header);
+				m.setSubject(header);
 				Log.i(TAG, "setBody");
 				String body = ((TextEntry) entry).getText();
 				ArrayList<String> tags = entry.getTagsAsArrayList();

@@ -70,8 +70,7 @@ public class EmailService extends Service
 						Log.i(TAG, "Set From");
 						m.setFrom(gmailaccString);
 						Log.i(TAG, "setSubject");
-						int momentnumber= prefs.getInt("momentnumber", 0);
-						m.setSubject("Moment #"+momentnumber+" "+entry.dateAsAString());
+						m.setSubject(entry.getHeader());
 						Log.i(TAG, "setBody");
 						String body="";
 						ArrayList<String> tags = entry.getTagsAsArrayList();

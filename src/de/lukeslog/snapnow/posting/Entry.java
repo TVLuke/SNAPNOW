@@ -36,19 +36,37 @@ public class Entry
 	public static final String TAG_POSTALCODE="plz";
 	public static final String TAG_LOCALITY="locality";
 	
-	HashMap<String, String> tags;
+	ArrayList<String> tags;
 	HashMap<String, Boolean> uploadServices;
 	
-	Date d;
+	String dateasstring;
+	String header;
 	
-	boolean uploaded=false;
-	long id;
+	protected boolean uploaded=false;
+	protected long id;
 	
+	//THIS CONSTRUCTOR IS FOR THE DATABASE CLASS...
+	Entry(long id, boolean uploaded, String date, String header, ArrayList t)
+	{
+		dateasstring=date;
+		Log.i(TAG, "Header="+header);
+		this.header=header;
+		Log.i(TAG, "Header="+this.header);
+		this.id=id;
+		this.uploaded=uploaded;
+		tags = t;
+	}
+	
+
 	Entry(Context ctx)
 	{
-		d = new Date();
+		Date d = new Date();
 		id= d.getTime();
-		tags = new HashMap<String, String>();
+		dateasstring = dateToAString(d);
+		SharedPreferences prefs = ctx.getSharedPreferences(SnapNowConstants.PREFS, 0);
+		int momentnumber= prefs.getInt("momentnumber", 0);
+		setHeader("Moment #"+momentnumber+" "+dateasstring);
+		tags = new ArrayList<String>();
 		uploadServices = new HashMap<String, Boolean>();
 		addTag(TAG_SNAPNOW, "SNAPNOW");
 		//get location
@@ -165,28 +183,31 @@ public class Entry
 		{
 			addTag(TAG_HOUR, (hour-12)+"pm");
 		}
-		Set<String> keys = tags.keySet();
-		for(String key : keys)
+		for(int i=tags.size()-1; i>=0; i--)
 		{
-			if(tags.get(key).contains("ü"))
+			
+			if(tags.get(i).contains("ü"))
 			{
-				tags.put(key, tags.get(key).replace("ü", "ue"));
+				tags.add(tags.get(i).replace("ü", "ue"));
+				tags.remove(i);
 			}
-			if(tags.get(key).contains("ö"))
+			if(tags.get(i).contains("ö"))
 			{
-				tags.put(key, tags.get(key).replace("ö", "oe"));
+				tags.add(tags.get(i).replace("ö", "oe"));
+				tags.remove(i);
 			}
-			if(tags.get(key).contains("ä"))
+			if(tags.get(i).contains("ä"))
 			{
-				tags.put(key, tags.get(key).replace("ä", "ae"));
+				tags.add(tags.get(i).replace("ä", "ae"));
+				tags.remove(i);
 			}
-			if(tags.get(key).equals("plznull"))
+			if(tags.get(i).contains("plznull"))
 			{
-				tags.remove(key);
+				tags.remove(i);
 			}
-			if(tags.get(key).equals("null"))
+			if(tags.get(i).contains("null"))
 			{
-				tags.remove(key);
+				tags.remove(i);
 			}
 		}
 
@@ -200,25 +221,13 @@ public class Entry
 		}
 		else
 		{
-			tags.put(type, tag);
+			tags.add(tag);
 		}
-	}
-	
-	public String getTag(String type)
-	{
-		return tags.get(type);
 	}
 	
 	public ArrayList<String> getTagsAsArrayList()
 	{
-		Collection<String> tagvalues = tags.values();
-		Iterator<String> it1 = tagvalues.iterator();
-		ArrayList<String> thetags = new ArrayList<String>();
-		while(it1.hasNext())
-		{
-			thetags.add(it1.next());
-		}
-		return thetags;
+		return tags;
 	}
 	
 	public void upload(UploadService uploadService)
@@ -303,7 +312,22 @@ public class Entry
 		return id;
 	}
 	
-	public String dateAsAString()
+	public String getDateAsString()
+	{
+		return dateasstring;
+	}
+	
+	public String getHeader()
+	{
+		return header;
+	}
+	
+	public void setHeader(String h)
+	{
+		this.header=h;
+	}
+	
+	private String dateToAString(Date d)
 	{
 		int y = d.getYear()+1900;
 		int month = d.getMonth();

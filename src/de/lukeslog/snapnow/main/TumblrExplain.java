@@ -26,7 +26,6 @@ public class TumblrExplain  extends Activity
 	        prefs = getSharedPreferences(SnapNowConstants.PREFS, 0);
 	        
 	        WebView webView = (WebView) findViewById(R.id.tumbrwebview);
-
 			webView.loadUrl("http://www.tumblr.com/docs/en/email_publishing");
     }
 

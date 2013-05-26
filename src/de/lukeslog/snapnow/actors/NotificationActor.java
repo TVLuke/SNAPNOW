@@ -28,14 +28,11 @@ public class NotificationActor extends Service {
 	public void onCreate() 
 	{
 		Log.d(TAG, "NotificationActor");
-		cancel=false;
-		context=this;
-		notification(260);
+		super.onCreate();
 	}
 
 	private void notification(final int number) 
 	{
-		super.onCreate();
 		new Thread(new Runnable() 
 		{
 			public void run() 
@@ -50,7 +47,7 @@ public class NotificationActor extends Service {
 						}
 						else
 						{
-							NotificationActor.this.notify(false);
+							NotificationActor.this.notify(true);
 						}
 						try 
 						{
@@ -62,6 +59,7 @@ public class NotificationActor extends Service {
 						}
 					}
 				}
+				cancel=true;
 			}
 		}).start();
 	}
@@ -73,7 +71,7 @@ public class NotificationActor extends Service {
     	//Log.i(TAG, "onNotification()");
     	final NotificationManager mNotMan = (NotificationManager) getSystemService(NOTIFICATION_SERVICE);
 		final Notification notfication = new Notification(
-				R.drawable.snaplogo, "SnapNow",
+				R.drawable.snapcolor, "SnapNow",
 				System.currentTimeMillis());
 		// on can puit the countdown here!
 		Intent settingsIntent = new Intent(this, SnapNowActivity.class);
@@ -95,6 +93,10 @@ public class NotificationActor extends Service {
 	{
 		super.onStartCommand(intent, flags, startId);
 		//Log.i(TAG, "Received start id " + startId + ": " + intent);
+		cancel=false;
+		context=this;
+		notification(230);
+		
 		return Service.START_NOT_STICKY;
 	}
 	

@@ -10,6 +10,7 @@ import de.lukeslog.snapnow.actors.NotificationActor;
 import de.lukeslog.snapnow.constants.SnapNowConstants;
 import de.lukeslog.snapnow.database.EntryDatabase;
 import de.lukeslog.snapnow.posting.Entry;
+import de.lukeslog.snapnow.posting.PhotoEntry;
 import de.lukeslog.snapnow.posting.TextEntry;
 import de.lukeslog.snapnow.posting.UploadService;
 import de.lukeslog.snapnow.stats.Statistics;
@@ -45,7 +46,7 @@ public class SnapNowBackgroundService  extends IntentService
 	Intent intent;
 	private static int countdown=-1;
 	SharedPreferences prefs;
-	private static ArrayList<Entry> entrys= new ArrayList<Entry>();
+	//private static ArrayList<Entry> entrys= new ArrayList<Entry>();
 	private static int month=-1;
 	//private static long lastTimeRandomNumber=0;
 
@@ -102,7 +103,7 @@ public class SnapNowBackgroundService  extends IntentService
     	{
     		dir.mkdir();
     	}
-    	//EntryDatabase.createDataBase(this); //if its already there it will not be created...
+    	EntryDatabase.createDataBase(this); //if its already there it will not be created...
     	
     	//TODO: check if there are any not uploaded things in there
     	//TODO: Upload them
@@ -125,6 +126,7 @@ public class SnapNowBackgroundService  extends IntentService
 		}
 		//...
 		prefs = getSharedPreferences(SnapNowConstants.PREFS, 0);
+		ArrayList<Entry> entrys = EntryDatabase.getNotUploadedEntrys();
 		if(entrys.size()>0)
 		{
 			Log.d(TAG, "uploadEntrys");
@@ -152,7 +154,7 @@ public class SnapNowBackgroundService  extends IntentService
 		}
 		if(countdown==-1) //
 		{
-			SnapNowBackgroundService.cleanEntrys();
+			//SnapNowBackgroundService.cleanEntrys();
 			NotificationManager mNotMan = (NotificationManager) getSystemService(NOTIFICATION_SERVICE);
 	    	mNotMan.cancel(48);
 			//Log.d(TAG, "Countdown=0");
@@ -172,11 +174,12 @@ public class SnapNowBackgroundService  extends IntentService
 				Log.d(TAG, "randomnumber="+number);
 			
 			
-				if(number==5)
+				if(number==1)
 				{
 					Statistics.alert(this);
 					Log.d(TAG, "hit random");
 					int momentnumber = prefs.getInt("momentnumber", 0);
+					momentnumber=15;
 					Editor edit = prefs.edit();
 					momentnumber++;
 					edit.putInt("momentnumber", momentnumber);
@@ -192,7 +195,7 @@ public class SnapNowBackgroundService  extends IntentService
 		else
 		{
 			countdown=countdown-1;
-			Log.d(TAG, countdown+" seconds left");
+			Log.d(TAG, countdown+" minutes left");
 		}
 		scheduleNext();
 	}
@@ -314,63 +317,32 @@ public class SnapNowBackgroundService  extends IntentService
 	
 	public static void addEntry(Entry e)
 	{
-		Log.d("SNAPNOW", "addEntry"+SnapNowBackgroundService.getEntrys().size());
-		entrys.add(e);
-		Log.d("SNAPNOW", "addEntry"+SnapNowBackgroundService.getEntrys().size());
-		//EntryDatabase.put(e);
-	}
-	
-	public static ArrayList<Entry> getEntrys()
-	{
-		return entrys;
-	}
-	
-	public static void clearEntrys()
-	{
-		entrys.clear();
-	}
-	
-	public static void cleanEntrys()
-	{
-		if(entrys.size()>0)
+		if (e instanceof PhotoEntry)
 		{
-			for (int i=entrys.size()-1; i>=0; i--)
-			{
-				if(entrys.get(i).isUploaded())
-				{
-					entrys.remove(i);
-				}
-			}
+			EntryDatabase.put((PhotoEntry) e);
 		}
+	}
+	
+	public static ArrayList<Entry> getUnuplodedEntrys()
+	{
+		return EntryDatabase.getNotUploadedEntrys();
+		//return entrys;
 	}
 	
 	public static void uploaded(Entry entryX)
 	{
 		long entryID = entryX.getId();
-		for (Entry entry : entrys)
-		{
-			if(entry.getId()==entryID)
-			{
-				entry.setUploaded(true);
-			}
-		}
+		EntryDatabase.setEntryToUploaded(entryID);
 	}
 	
 	public static Entry getEntryById(long entryId)
 	{
-		for (Entry entry : entrys)
-		{
-			if(entry.getId()==entryId)
-			{
-				return  entry;
-			}
-		}
-		return null;
+		return EntryDatabase.getPhotoEntryById(entryId);
 	}
 	
 	public void uploadentrys()
 	{
-		Log.d("SNAPNOW", "->Entry"+SnapNowBackgroundService.getEntrys().size());
+		Log.d("SNAPNOW", "->Entry"+SnapNowBackgroundService.getUnuplodedEntrys().size());
 		ConnectivityManager connManager = (ConnectivityManager) getSystemService(CONNECTIVITY_SERVICE);
 		NetworkInfo mWifi = connManager.getNetworkInfo(ConnectivityManager.TYPE_WIFI);
 		boolean wifi = mWifi.isConnected();
