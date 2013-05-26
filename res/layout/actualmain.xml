@@ -19,7 +19,7 @@
                 android:id="@+id/TextView02"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:background="#004b5a"
+                android:background="#FF9955"
                 android:text="@string/stats"
                 android:textAppearance="?android:attr/textAppearanceMedium" />
 
@@ -82,7 +82,7 @@
 			    android:layout_height="wrap_content" >
 
 			    <TextView
-			        android:id="@+id/textView5"
+			        android:id="@+id/textView5alerts"
 			        android:layout_width="wrap_content"
 			        android:layout_height="wrap_content"
 			        android:text="@string/alerts" />
@@ -100,7 +100,7 @@
 			    android:layout_height="wrap_content" >
 
 			    <TextView
-			        android:id="@+id/textView5"
+			        android:id="@+id/textView5timelast"
 			        android:layout_width="wrap_content"
 			        android:layout_height="wrap_content"
 			        android:text="@string/timesincelast" />
@@ -117,7 +117,7 @@
 			    android:layout_height="wrap_content" >
 
 			    <TextView
-			        android:id="@+id/textView5"
+			        android:id="@+id/textView5thismonth"
 			        android:layout_width="wrap_content"
 			        android:layout_height="wrap_content"
 			        android:text="@string/thismonth" />
@@ -134,10 +134,10 @@
 			    android:layout_height="wrap_content" >
 
 			    <TextView
-			        android:id="@+id/textView5"
+			        android:id="@+id/textView5runtime"
 			        android:layout_width="wrap_content"
 			        android:layout_height="wrap_content"
-			        android:text="Runtime:  " />
+			        android:text="@string/runtime" />
 
 			    <TextView
 			        android:id="@+id/monthruntime"
@@ -151,10 +151,10 @@
 			    android:layout_height="wrap_content" >
 
 			    <TextView
-			        android:id="@+id/textView5"
+			        android:id="@+id/textView5alertsx"
 			        android:layout_width="wrap_content"
 			        android:layout_height="wrap_content"
-			        android:text="Alerts:  " />
+			        android:text="@string/alerts" />
 
 			    <TextView
 			        android:id="@+id/monthalerts"
@@ -167,7 +167,7 @@
                 android:id="@+id/TextView01"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:background="#004b5a"
+                android:background="#FF9955"
                 android:text="@string/settings"
                 android:textAppearance="?android:attr/textAppearanceMedium" />
             
@@ -179,10 +179,10 @@
                 android:textColor="@android:color/black"/>
 			
             <TextView
-                android:id="@+id/TextView02"
+                android:id="@+id/TextView02google"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:background="#004b5a"
+                android:background="#FF9955"
                 android:text="@string/google"
                 android:textAppearance="?android:attr/textAppearanceMedium" />
 
@@ -218,10 +218,10 @@
            
             
             <TextView
-                android:id="@+id/TextView01"
+                android:id="@+id/TextView01tumblr"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:background="#004b5a"
+                android:background="#FF9955"
                 android:text="@string/tumblr"
                 android:textAppearance="?android:attr/textAppearanceMedium" />
 
@@ -288,7 +288,7 @@
                 android:id="@+id/textView1"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:background="#004b5a"
+                android:background="#FF9955"
                 android:text="@string/twitter"
                 android:textAppearance="?android:attr/textAppearanceMedium" />
 
@@ -303,7 +303,7 @@
                 android:id="@+id/textView8"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:background="#004b5a"
+                android:background="#FF9955"
                 android:text="@string/sendviaemail"
                 android:textAppearance="?android:attr/textAppearanceMedium" />
 
@@ -326,6 +326,15 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:ems="10"  />
+            
+            <TextView
+                android:id="@+id/textView8xx"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="#FF9955"
+                android:text=" "
+                android:textAppearance="?android:attr/textAppearanceMedium" />
+                        
         </LinearLayout>
     </ScrollView>
 

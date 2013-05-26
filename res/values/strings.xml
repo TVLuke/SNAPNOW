@@ -1,8 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
-    <string name="hello">Hello World, SnapNowActivity!</string>
-    <string name="app_name">SnapNow</string>
+    <string name="app_name">SNAPNOW</string>
     <string name ="at">\@</string>
     <string name="version">Version:  </string>
     <string name="firstactivation">First Activation:  </string>
@@ -40,7 +39,7 @@
 	<string name="april">April</string>
 	<string name="may">May</string>
 	<string name="june">June</string>
-	<string name="july"></string>
+	<string name="july">July</string>
 	<string name="august">August</string>
 	<string name="september">September</string>
 	<string name="october">October</string>
@@ -53,4 +52,10 @@
 	<string name="runntime">Runntime</string>
 	<string name="coughtofmoments">I cought %1$s of %2$s moments this month.\n"</string>
 	<string name="monthendstats">Month End Statistics</string>
+	<string name="whatareyoulookingat">What are you looking at right now?</string>
+	<string name="blackoutl">BLACKOUT</string>
+	<string name="enableblackouttimes">Enable Blackout Times</string>
+	<string name="starting">Starting</string>
+	<string name="ending">Ending</string>
+	<string name="instantblackout">Instant Blackout</string>
 </resources>

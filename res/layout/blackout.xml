@@ -2,7 +2,7 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="fill_parent"
     android:layout_height="fill_parent"
-    android:background="#000000"
+    android:background="#FFFFFF"
     android:orientation="vertical" >
 
     <ScrollView
@@ -20,22 +20,24 @@
                 android:id="@+id/TextView02"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:background="#000000"
-                android:text="BLACKOUT"
+                android:background="#FFFFFF"
+                android:textColor="@android:color/black"
+                android:text="@string/blackoutl"
                 android:textAppearance="?android:attr/textAppearanceLarge" />
 
         	<CheckBox
        			android:id="@+id/blackout"
        		 	android:layout_width="match_parent"
         		android:layout_height="wrap_content"
-        		android:text="Enable Blackout Times" />
+        		android:textColor="@android:color/black"
+        		android:text="@string/enableblackouttimes" />
 
         	<TextView
         	    android:id="@+id/textView1"
         	    android:layout_width="match_parent"
         	    android:layout_height="wrap_content"
-        	    android:background="#004b5a"
-        	    android:text="Starting"
+        	    android:background="#FF9955"
+        	    android:text="@string/starting"
         	    android:textAppearance="?android:attr/textAppearanceMedium"
         	    android:textColor="#FFFFFF" />
                 
@@ -48,17 +50,18 @@
     	android:id="@+id/TextView02"
    		android:layout_width="match_parent"
       	android:layout_height="wrap_content"
-     	android:background="#000000"
+     	android:background="#FFFFFF"
+     	android:textColor="@android:color/black"
       	android:text=""
      	android:textAppearance="?android:attr/textAppearanceMedium" />
     			
         <TextView
-        android:id="@+id/textView2"
+        android:id="@+id/textView2yy"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Ending"
+        android:text="@string/ending"
         android:textAppearance="?android:attr/textAppearanceMedium"
-        android:background="#004b5a"
+        android:background="#FF9955"
         android:textColor="#FFFFFF" />
 
 
@@ -71,9 +74,9 @@
         android:id="@+id/textView1"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Instant Blackout"
+        android:text="@string/instantblackout"
         android:textAppearance="?android:attr/textAppearanceMedium"
-        android:background="#004b5a"
+        android:background="#FF9955"
         android:textColor="#FFFFFF" />
 
 
@@ -83,9 +86,18 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="ToggleButton" />
-        	
+
+   <TextView
+        android:id="@+id/textView1end"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text=" "
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:background="#FF9955"
+        android:textColor="#FFFFFF" />        	
         </LinearLayout>
     </ScrollView>
-
+
+
     
 </LinearLayout>

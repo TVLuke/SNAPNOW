@@ -71,14 +71,14 @@ public class NotificationActor extends Service {
     	//Log.i(TAG, "onNotification()");
     	final NotificationManager mNotMan = (NotificationManager) getSystemService(NOTIFICATION_SERVICE);
 		final Notification notfication = new Notification(
-				R.drawable.snapcolor, "SnapNow",
+				R.drawable.snapcolor, "SNAPNOW",
 				System.currentTimeMillis());
 		// on can puit the countdown here!
 		Intent settingsIntent = new Intent(this, SnapNowActivity.class);
 		final PendingIntent pIntent = PendingIntent.getActivity(this, 0,
 				settingsIntent, 0);
 		notfication.setLatestEventInfo(context.getApplicationContext(),
-				"SnapNow", "What are you looking at right now?", pIntent);
+				"SNAPNOW", getResources().getString(R.string.whatareyoulookingat), pIntent);
 		notfication.defaults |= Notification.DEFAULT_VIBRATE;
 	    notfication.vibrate = new long[]{500,500,500,500};
 	    if(sound)
