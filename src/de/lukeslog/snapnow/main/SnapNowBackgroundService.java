@@ -17,7 +17,6 @@ import de.lukeslog.snapnow.stats.Statistics;
 
 import android.app.AlarmManager;
 import android.app.IntentService;
-import android.app.Notification;
 import android.app.NotificationManager;
 import android.app.PendingIntent;
 import android.app.Service;
@@ -42,12 +41,11 @@ public class SnapNowBackgroundService  extends IntentService
 {
 
 	private final String TAG = SnapNowConstants.TAG;
-	private Context context;
 	Intent intent;
 	private static int countdown=-1;
+	public static boolean blackout=false;
 	SharedPreferences prefs;
 	//private static ArrayList<Entry> entrys= new ArrayList<Entry>();
-	private static int month=-1;
 	//private static long lastTimeRandomNumber=0;
 
 	public SnapNowBackgroundService() 
@@ -65,8 +63,6 @@ public class SnapNowBackgroundService  extends IntentService
 	public void onCreate() 
 	{
 		super.onCreate();
-	 	//Log.i(TAG, "SNAPNOW Service Läuft");
-	    context=this;
 	}
 
 	@Override
@@ -104,11 +100,10 @@ public class SnapNowBackgroundService  extends IntentService
     		dir.mkdir();
     	}
     	EntryDatabase.createDataBase(this); //if its already there it will not be created...
-    	
-    	//TODO: check if there are any not uploaded things in there
-    	//TODO: Upload them
+		prefs = getSharedPreferences(SnapNowConstants.PREFS, 0);
 		//check if we are in a new month, if so, geerate a summative post
 		Date d = new Date();
+		int month = prefs.getInt("month", -1);
 		if(month==-1)
 		{
 			//month not set yet;
@@ -121,11 +116,12 @@ public class SnapNowBackgroundService  extends IntentService
 			{
 				//a new month has started.
 				generateSumationEntry(month);
-				month=d.getMonth();
+				Editor edit = prefs.edit();
+				edit.putInt("month", month);
+				edit.commit();
 			}
 		}
 		//...
-		prefs = getSharedPreferences(SnapNowConstants.PREFS, 0);
 		ArrayList<Entry> entrys = EntryDatabase.getNotUploadedEntrys();
 		if(entrys.size()>0)
 		{
@@ -162,13 +158,32 @@ public class SnapNowBackgroundService  extends IntentService
     		//lastTimeRandomNumber=d.getTime();
 		    	
 	    	boolean blackoutbool = prefs.getBoolean("blackout", false);
-	    	Log.d(TAG, "blackout"+blackoutbool);
+	    	Log.d(TAG, "blackout functionality enabled ="+blackoutbool);
 	    	boolean instantblackoutbool = prefs.getBoolean("instantblackout", false);
 	    	Log.d(TAG, "instantblackout"+instantblackoutbool);
 	    	boolean blackoutnow = isBlackout();
-			if((!blackoutbool || !blackoutnow) && !instantblackoutbool)
-			{
-	    	
+	    	if(instantblackoutbool || (blackoutbool && blackoutnow ))
+	    	{
+	    		if(!blackout)
+	    		{
+		    		blackout=true;
+	    			Intent notif2 = new Intent(this,NotificationService.class);
+	    			stopService(notif2);
+	    			startService(notif2);
+	    		}
+	    		blackout=true;
+	    		Log.i(TAG, "Blackout!!!");
+	    	}
+	    	else
+	    	{
+	    		if(blackout)
+	    		{
+	    			blackout=false;
+	    			Intent notif2 = new Intent(this,NotificationService.class);
+	    			stopService(notif2);
+	    			startService(notif2);
+	    		}
+    			blackout=false;
 				int number = myRandom(SnapNowConstants.RANDOMNUMBER);
 				Statistics.randomNumber(this, number);
 				Log.d(TAG, "randomnumber="+number);
@@ -179,7 +194,6 @@ public class SnapNowBackgroundService  extends IntentService
 					Statistics.alert(this);
 					Log.d(TAG, "hit random");
 					int momentnumber = prefs.getInt("momentnumber", 0);
-					momentnumber=15;
 					Editor edit = prefs.edit();
 					momentnumber++;
 					edit.putInt("momentnumber", momentnumber);
@@ -212,6 +226,7 @@ public class SnapNowBackgroundService  extends IntentService
         boolean instantblackoutbool = prefs.getBoolean("instantblackout", false);
         if(instantblackoutbool)
         {
+        	Log.d(TAG, "instantblackout");
         	return true;
         }
         else
@@ -255,7 +270,7 @@ public class SnapNowBackgroundService  extends IntentService
         			return true;
         		}
         	}
-        	if(blackoutstarthour<blackoutendhour) //in this case the blackout goes over midnight
+        	if(blackoutstarthour>blackoutendhour) //in this case the blackout goes over midnight
         	{
         		Log.d(TAG, "c3");
         		if(blackoutstarthour==hour && blackoutstartminute<minute)
@@ -278,7 +293,7 @@ public class SnapNowBackgroundService  extends IntentService
         		}
         		else
         		{
-        			return true;
+        			return false;
         		}
         	}
         }
@@ -350,7 +365,7 @@ public class SnapNowBackgroundService  extends IntentService
 		if(onlywifi && wifi || !onlywifi)
 		{
 			Log.d(TAG, "startUploadService");
-			Intent backgr = new Intent(this,UploadService.class);
+			Intent backgr = new Intent(this, UploadService.class);
 			startService(backgr);
 		}
 	}
@@ -423,7 +438,7 @@ public class SnapNowBackgroundService  extends IntentService
 		stats = stats+""+getResources().getString(R.string.overallruntime)+": "+Statistics.runtimeInSeconds(this)+" "+getResources().getString(R.string.seconds)+". \n";
 		stats = stats+""+getResources().getString(R.string.overallcought)+": "+(Statistics.sumofallerts(this)-Statistics.sumoffails(this))+".\n \n";
 		
-	    long [] rtis = Statistics.runtimeInSecondsMonth(this, d.getTime()-100000);
+	    long [] rtis = Statistics.runtimeInSecondsMonth(this, d.getTime()-432000000);//back five days to be sure to get the right month...
 	    double r1 = rtis[0];
 	    int r1i = (int)r1;
 	    String [] difarray2 = Statistics.generateRightTimeUnit(r1i, this);
