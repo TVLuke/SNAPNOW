@@ -58,4 +58,6 @@
 	<string name="starting">Starten</string>
 	<string name="ending">Enden</string>
 	<string name="instantblackout">Sofort Blackout</string>
+	<string name="reupload">Re Upload</string>
+	<string name="moments">Momente</string>
 </resources>

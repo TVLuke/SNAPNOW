@@ -30,6 +30,7 @@ public class Statistics
 	{
 		prefs = context.getSharedPreferences(PREFS, 0);
 		long f = prefs.getLong("firststart", 0);
+		long lasstamp = prefs.getLong("lasstamp", 0);
 		int x_number = prefs.getInt("occurance"+number, 0); //times this number has been drawn
 		int x = prefs.getInt("occurance", 0); //times any number has been drwan
 		long tsl = prefs.getLong("timesincelastalert_long", 0);
@@ -54,17 +55,18 @@ public class Statistics
 			avDifBetweenStamps = difsum/stamps;
 			Log.d(TAG, "now: "+difnow);
 			Log.d(TAG, "av: "+avDifBetweenStamps);
-			if(difnow<65000)
+			tsl=tsl+difnow;
+			editor.putLong("timesincelastalert_long", tsl);
+			if(difnow<120000)
 			{
 				long mseconds= prefs.getLong("mseconds", 0);
 				long msecondsmonth= prefs.getLong("mseconds_"+month+"_"+year, 0);
-				tsl=tsl+difnow;
 				mseconds=mseconds+difnow;
 				msecondsmonth=msecondsmonth+difnow;
 				editor.putLong("mseconds", mseconds);
-				editor.putLong("timesincelastalert_long", tsl);
 				editor.putLong("mseconds_"+month+"_"+year, msecondsmonth);
 			}
+			editor.putLong("lasttamp", laststamp);
 		}
 		if(f==0)
 		{

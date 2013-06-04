@@ -113,6 +113,7 @@ public class PostToTumblrViaMail extends Service
 							catch (Exception e) 
 							{
 								// TODO Auto-generated catch block
+								Log.i(TAG, "cc"+e);
 								e.printStackTrace();
 							}	
 						}
@@ -166,6 +167,7 @@ public class PostToTumblrViaMail extends Service
 						catch (Exception e) 
 						{
 							// TODO Auto-generated catch block
+							Log.i(TAG, "ff"+e);
 							e.printStackTrace();
 						}	
 					}

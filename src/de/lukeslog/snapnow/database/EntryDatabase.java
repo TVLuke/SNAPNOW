@@ -155,6 +155,13 @@ public class EntryDatabase
 		database.update(SnapNowConstants.TABLE_ENTRY, args, SnapNowConstants.TABLE_ENTRY_ENTRYID+" = "+entryidx, null);
 		Log.i(TAG, "did it work? not sure?");
 	}
+	
+	public static void deleteEntry(long entryidx) 
+	{
+		// TODO Auto-generated method stub
+		database.delete(SnapNowConstants.TABLE_ENTRY, SnapNowConstants.TABLE_ENTRY_ENTRYID+" = "+entryidx, null);
+	}
+	
 	public static ArrayList<Entry> getNotUploadedEntrys()
 	{
 		Log.i(TAG, "get unoploaded...");
@@ -212,4 +219,60 @@ public class EntryDatabase
 		return entrys;
 	}
 	
+	public static ArrayList<Entry> getAllEntrys()
+	{
+		Log.i(TAG, "get all...");
+		Cursor c = database.query(SnapNowConstants.TABLE_ENTRY, new String[] {
+				SnapNowConstants.TABLE_ENTRY_ENTRYID,
+				SnapNowConstants.TABLE_ENTRY_DATE,
+				SnapNowConstants.TABLE_ENTRY_HEADER,
+				SnapNowConstants.TABLE_ENTRY_UPLOADED,
+				SnapNowConstants.TABLE_ENTRY_TAGS,
+				SnapNowConstants.TABLE_ENTRY_PATH,
+				SnapNowConstants.TABLE_ENTRY_TYPE},
+				null,
+		        null,
+		        null,
+		        null,
+		        null);
+		
+		Log.i(TAG, "cursorsize: "+c.getCount());
+		ArrayList<Entry> entrys= new ArrayList<Entry>();
+		while (c.moveToNext()) 
+		{
+			String type = c.getString(c.getColumnIndex(SnapNowConstants.TABLE_ENTRY_TYPE));
+			if(type.equals(SnapNowConstants.ENTRYTYPE_PHOTO))
+			{
+				long entryid = c.getLong(c.getColumnIndex(SnapNowConstants.TABLE_ENTRY_ENTRYID));
+				//Log.i(TAG, ""+entryid);
+				String date = c.getString(c.getColumnIndex(SnapNowConstants.TABLE_ENTRY_DATE));
+				//Log.i(TAG, ""+date);
+				String header = c.getString(c.getColumnIndex(SnapNowConstants.TABLE_ENTRY_HEADER));
+				//Log.i(TAG, ""+header);
+				boolean uploaded =false;
+				int u = c.getInt(c.getColumnIndex(SnapNowConstants.TABLE_ENTRY_UPLOADED));
+				if(u==1)
+				{
+					uploaded=true;
+				}
+				String tags = c.getString(c.getColumnIndex(SnapNowConstants.TABLE_ENTRY_TAGS));
+				StringTokenizer tk = new StringTokenizer(tags, ",");
+				ArrayList<String> tagslist = new ArrayList<String>();
+				while(tk.hasMoreTokens())
+				{
+					String tag = tk.nextToken();
+					tag=tag.replace(" ", "");
+					tag=tag.trim();
+					tagslist.add(tag);
+					//Log.i(TAG, ""+tag);
+					
+				}
+				String path = c.getString(c.getColumnIndex(SnapNowConstants.TABLE_ENTRY_PATH));
+				PhotoEntry pe = new PhotoEntry(entryid, uploaded, date, header, tagslist, path);
+				entrys.add(pe);
+			}
+		}
+		c.close();
+		return entrys;
+	}
 }

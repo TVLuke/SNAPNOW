@@ -256,6 +256,10 @@ public class MainActivity extends Activity
 			Intent black = new Intent(this, BlackoutDefinition.class);
 			startActivity(black);
 			return true;
+		case R.id.reupload:
+			dontshutdown=true;
+			Intent reupload = new Intent(this, ReUploadActivity.class);
+			startActivity(reupload);
 		default:
 			return super.onOptionsItemSelected(item);
 		}

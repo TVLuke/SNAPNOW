@@ -230,7 +230,7 @@ public class Entry
 		return tags;
 	}
 	
-	public void upload(UploadService uploadService)
+	public void upload(Context uploadService)
 	{
 		Log.d(TAG, "entry upload");
 		SharedPreferences prefs = uploadService.getSharedPreferences(SnapNowConstants.PREFS, 0);
@@ -271,14 +271,14 @@ public class Entry
 		uploaded=x;
 	}
 	
-	private void postToTumblr(UploadService uploadService)
+	private void postToTumblr(Context uploadService)
 	{
 			Intent ptt = new Intent(uploadService, PostToTumblrViaMail.class);
 			ptt.putExtra("EntryID", id);
 			uploadService.startService(ptt);
 	}
 	
-	private void postToTwitter(UploadService uploadService)
+	private void postToTwitter(Context uploadService)
 	{
        	try 
        	{
@@ -294,7 +294,7 @@ public class Entry
 		}
    	}
 	
-	private void postToEmail(UploadService uploadService)
+	private void postToEmail(Context uploadService)
 	{
 		Intent em = new Intent(uploadService, EmailService.class);
 		em.putExtra("EntryID", id);
@@ -304,7 +304,7 @@ public class Entry
 	//if no uploading is activated the post will just be marked as done so as to not upload it later...,
 	private void postToNothing()
 	{
-		uploaded=true;
+		//uploaded=true;
 	}
 
 	public long getId() 
