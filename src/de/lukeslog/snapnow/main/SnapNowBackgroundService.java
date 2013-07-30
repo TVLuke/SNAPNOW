@@ -108,12 +108,17 @@ public class SnapNowBackgroundService  extends IntentService
 		{
 			//month not set yet;
 			//lastTimeRandomNumber=d.getTime();
+			Log.d(TAG, "moth is never realy set is it...");
 			month= d.getMonth();
+			Editor edit = prefs.edit();
+			edit.putInt("month", month);
+			edit.commit();
 		}
 		else
 		{
 			if(d.getMonth()!=month)
 			{
+				Log.d(TAG, "new month");
 				//a new month has started.
 				generateSumationEntry(month);
 				Editor edit = prefs.edit();
@@ -336,6 +341,10 @@ public class SnapNowBackgroundService  extends IntentService
 		{
 			EntryDatabase.put((PhotoEntry) e);
 		}
+		if(e instanceof TextEntry)
+		{
+			EntryDatabase.put((TextEntry) e);
+		}
 	}
 	
 	public static ArrayList<Entry> getUnuplodedEntrys()
@@ -352,7 +361,7 @@ public class SnapNowBackgroundService  extends IntentService
 	
 	public static Entry getEntryById(long entryId)
 	{
-		return EntryDatabase.getPhotoEntryById(entryId);
+		return EntryDatabase.getEntryById(entryId);
 	}
 	
 	public void uploadentrys()
@@ -372,6 +381,7 @@ public class SnapNowBackgroundService  extends IntentService
 	
 	private void generateSumationEntry(int i)
 	{
+		Log.i(TAG, "month end entry to be generated");
 		String thismonth = getResources().getString(R.string.thismonth);
 		String statsforthemonthof = getResources().getString(R.string.statsforthemonthof);
 		String stats="";
@@ -452,6 +462,8 @@ public class SnapNowBackgroundService  extends IntentService
 		stats = stats+"<b>"+thismonth+"</b>\n";
 		stats = stats+""+getResources().getString(R.string.runtime)+": "+difarray2[0]+" "+difarray2[1]+" ("+upmonth2+"%)\n";
 		stats=stats+String.format(getResources().getString(R.string.coughtofmoments), ""+(Statistics.sumofallertsMonth(this,  d.getTime())-Statistics.sumoffailsMonth(this, d.getTime())), ""+Statistics.sumofallertsMonth(this, d.getTime()))+"\n";
+		
+		Log.d(TAG, stats);
 		
 		TextEntry entry = new TextEntry(getResources().getString(R.string.monthendstats), stats, this);
 		SnapNowBackgroundService.addEntry(entry);
