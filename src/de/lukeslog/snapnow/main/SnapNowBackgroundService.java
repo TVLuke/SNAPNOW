@@ -119,6 +119,7 @@ public class SnapNowBackgroundService  extends IntentService
 			if(d.getMonth()!=month)
 			{
 				Log.d(TAG, "new month");
+				month= d.getMonth();
 				//a new month has started.
 				generateSumationEntry(month);
 				Editor edit = prefs.edit();
@@ -461,7 +462,7 @@ public class SnapNowBackgroundService  extends IntentService
 	    
 		stats = stats+"<b>"+thismonth+"</b>\n";
 		stats = stats+""+getResources().getString(R.string.runtime)+": "+difarray2[0]+" "+difarray2[1]+" ("+upmonth2+"%)\n";
-		stats=stats+String.format(getResources().getString(R.string.coughtofmoments), ""+(Statistics.sumofallertsMonth(this,  d.getTime())-Statistics.sumoffailsMonth(this, d.getTime())), ""+Statistics.sumofallertsMonth(this, d.getTime()))+"\n";
+		stats=stats+String.format(getResources().getString(R.string.coughtofmoments), ""+(Statistics.sumofallertsMonth(this,  d.getTime()-432000000)-Statistics.sumoffailsMonth(this, d.getTime())), ""+Statistics.sumofallertsMonth(this, d.getTime()))+"\n";
 		
 		Log.d(TAG, stats);
 		
