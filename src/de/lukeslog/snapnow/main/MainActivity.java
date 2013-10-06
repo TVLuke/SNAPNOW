@@ -116,7 +116,7 @@ public class MainActivity extends Activity
 	        	Editor edit = prefs.edit();
 	        	edit.putString("gmailpsw", s.toString());
 	        	edit.commit();
-	        	 checkiftumblrisOK();
+	        	checkiftumblrisOK();
 	        }
 	        public void beforeTextChanged(CharSequence s, int start, int count, int after)
 	        {
@@ -381,7 +381,7 @@ public class MainActivity extends Activity
     	    double nx3 = nx2b/100;
     	    String [] difarray2 = Statistics.generateRightTimeUnit(Statistics.runtimeInSeconds(ctx), ctx);
 
-    	    long [] rtis = Statistics.runtimeInSecondsMonth(ctx, d.getTime());
+    	    long [] rtis = Statistics.runtimeInSecondsMonth(ctx, d.getTime(), false);
     	    double r1 = rtis[0];
     	    double r2 = rtis[1];
     	    double upmonth = r1/(r2/100); 
@@ -414,5 +414,6 @@ public class MainActivity extends Activity
         {
             handler.removeCallbacks(this); // stop the map from updating
         }
+        
 	}
 }

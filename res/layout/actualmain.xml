@@ -177,7 +177,8 @@
                 android:layout_height="wrap_content"
                 android:text="@string/onlyuploadinwifitext" 
                 android:textColor="@android:color/black"/>
-			
+
+	
             <TextView
                 android:id="@+id/TextView02google"
                 android:layout_width="match_parent"

@@ -13,7 +13,7 @@ public class SnapNowConstants
 	public static final String ENTRYTYPE_PHOTO ="photo";
 	public static final String ENTRYTYPE_TEXT = "text";
 	
-	public static String VERSION="0.92";
+	public static String VERSION="0.93";
 	
 	public static String DATABASE_NAME = "SnapNowDatabase";
 	public static final int DATABASE_VERSION=8;

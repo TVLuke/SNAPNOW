@@ -449,7 +449,7 @@ public class SnapNowBackgroundService  extends IntentService
 		stats = stats+""+getResources().getString(R.string.overallruntime)+": "+Statistics.runtimeInSeconds(this)+" "+getResources().getString(R.string.seconds)+". \n";
 		stats = stats+""+getResources().getString(R.string.overallcought)+": "+(Statistics.sumofallerts(this)-Statistics.sumoffails(this))+".\n \n";
 		
-	    long [] rtis = Statistics.runtimeInSecondsMonth(this, d.getTime()-432000000);//back five days to be sure to get the right month...
+	    long [] rtis = Statistics.runtimeInSecondsMonth(this, d.getTime()-432000000, true);//back five days to be sure to get the right month...
 	    double r1 = rtis[0];
 	    int r1i = (int)r1;
 	    String [] difarray2 = Statistics.generateRightTimeUnit(r1i, this);
@@ -462,7 +462,7 @@ public class SnapNowBackgroundService  extends IntentService
 	    
 		stats = stats+"<b>"+thismonth+"</b>\n";
 		stats = stats+""+getResources().getString(R.string.runtime)+": "+difarray2[0]+" "+difarray2[1]+" ("+upmonth2+"%)\n";
-		stats=stats+String.format(getResources().getString(R.string.coughtofmoments), ""+(Statistics.sumofallertsMonth(this,  d.getTime()-432000000)-Statistics.sumoffailsMonth(this, d.getTime())), ""+Statistics.sumofallertsMonth(this, d.getTime()))+"\n";
+		stats=stats+String.format(getResources().getString(R.string.coughtofmoments), ""+(Statistics.sumofallertsMonth(this,  d.getTime()-432000000)-Statistics.sumoffailsMonth(this, d.getTime()-432000000)), ""+Statistics.sumofallertsMonth(this, d.getTime()-432000000))+"\n";
 		
 		Log.d(TAG, stats);
 		

@@ -293,6 +293,7 @@ public class EntryDatabase
 		Cursor c = database.query(SnapNowConstants.TABLE_ENTRY, new String[] {
 				SnapNowConstants.TABLE_ENTRY_ENTRYID,
 				SnapNowConstants.TABLE_ENTRY_DATE,
+				SnapNowConstants.TABLE_ENTRY_TEXT,
 				SnapNowConstants.TABLE_ENTRY_HEADER,
 				SnapNowConstants.TABLE_ENTRY_UPLOADED,
 				SnapNowConstants.TABLE_ENTRY_TAGS,
@@ -337,6 +338,36 @@ public class EntryDatabase
 				}
 				String path = c.getString(c.getColumnIndex(SnapNowConstants.TABLE_ENTRY_PATH));
 				PhotoEntry pe = new PhotoEntry(entryid, uploaded, date, header, tagslist, path);
+				entrys.add(pe);
+			}
+			if(type.equals(SnapNowConstants.ENTRYTYPE_TEXT))
+			{
+				long entryid = c.getLong(c.getColumnIndex(SnapNowConstants.TABLE_ENTRY_ENTRYID));
+				//Log.i(TAG, ""+entryid);
+				String date = c.getString(c.getColumnIndex(SnapNowConstants.TABLE_ENTRY_DATE));
+				//Log.i(TAG, ""+date);
+				String header = c.getString(c.getColumnIndex(SnapNowConstants.TABLE_ENTRY_HEADER));
+				//Log.i(TAG, ""+header);
+				String text = c.getString(c.getColumnIndex(SnapNowConstants.TABLE_ENTRY_TEXT));
+				boolean uploaded =false;
+				int u = c.getInt(c.getColumnIndex(SnapNowConstants.TABLE_ENTRY_UPLOADED));
+				if(u==1)
+				{
+					uploaded=true;
+				}
+				String tags = c.getString(c.getColumnIndex(SnapNowConstants.TABLE_ENTRY_TAGS));
+				StringTokenizer tk = new StringTokenizer(tags, ",");
+				ArrayList<String> tagslist = new ArrayList<String>();
+				while(tk.hasMoreTokens())
+				{
+					String tag = tk.nextToken();
+					tag=tag.replace(" ", "");
+					tag=tag.trim();
+					tagslist.add(tag);
+					//Log.i(TAG, ""+tag);
+					
+				}
+				TextEntry pe = new TextEntry(entryid, uploaded, date, header, tagslist, text);
 				entrys.add(pe);
 			}
 		}

@@ -98,7 +98,7 @@ public class Statistics
 		return seconds;
 	}
 	
-	public static long[] runtimeInSecondsMonth(Context context, long timestamp)
+	public static long[] runtimeInSecondsMonth(Context context, long timestamp, boolean monthend)
 	{
 		prefs = context.getSharedPreferences(PREFS, 0);
 		Date d = new Date(timestamp); 
@@ -109,6 +109,10 @@ public class Statistics
 		long secondsthismonth=0;
 
 		int daysthismonth = d.getDate()-1;
+		if(monthend)
+		{
+			daysthismonth = daysthismonth+5;
+		}
 		secondsthismonth = daysthismonth*24*60*60;
 		int hourofday = d.getHours();
 		secondsthismonth=secondsthismonth+hourofday*60*60;
