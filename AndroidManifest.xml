@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="de.lukeslog.snapnow"
-    android:versionCode="8"
-    android:versionName="8.0" >
+    android:versionCode="109"
+    android:versionName="8.2.Muhaha" >
 
     <uses-sdk android:minSdkVersion="10" />
 	<uses-feature android:name="android.hardware.camera" />
@@ -20,14 +20,14 @@
         android:icon="@drawable/snaplogo"
         android:label="@string/app_name" >
         <activity
-            android:name="de.lukeslog.snapnow.main.MainActivity"
+            android:name="de.lukeslog.snapnao.main.MainActivity"
             android:label="@string/app_name" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name="de.lukeslog.snapnow.main.SnapNowActivity" android:theme="@style/Theme.Transparent" android:screenOrientation="landscape" android:configChanges="orientation|keyboardHidden"></activity>
+        <activity android:name="de.lukeslog.snapnao.main.SnapNowActivity" android:theme="@style/Theme.Transparent" android:screenOrientation="landscape" android:configChanges="orientation|keyboardHidden"></activity>
         <activity android:name="de.lukeslog.posting.PostToTumblr">
         	<intent-filter>
                 <action android:name="android.intent.action.VIEW"/>
@@ -36,7 +36,7 @@
                 <data android:scheme="snapnow"/>
             </intent-filter>
         </activity>
-        <activity android:name="de.lukeslog.snapnow.posting.PostToTwitter">
+        <activity android:name="de.lukeslog.snapnao.posting.PostToTwitter">
         	<intent-filter>
                 <action android:name="android.intent.action.VIEW"/>
                 <category android:name="android.intent.category.DEFAULT" />
@@ -47,20 +47,20 @@
         <activity 
             android:theme="@android:style/Theme.Dialog"
             android:label="@string/app_name"
-            android:name="de.lukeslog.snapnow.main.TumblrExplain">
+            android:name="de.lukeslog.snapnao.main.TumblrExplain">
         </activity>
         <activity 
             android:label="@string/app_name"
-            android:name="de.lukeslog.snapnow.main.BlackoutDefinition"/>
+            android:name="de.lukeslog.snapnao.main.BlackoutDefinition"/>
 		<activity 
             android:label="@string/app_name"
-            android:name="de.lukeslog.snapnow.main.ReUploadActivity"/>
-        <service android:name="de.lukeslog.snapnow.posting.PostToTumblrViaMail"></service>
-        <service android:name="de.lukeslog.snapnow.main.NotificationService"></service>
-        <service android:name="de.lukeslog.snapnow.actors.NotificationActor"></service>
-        <service android:name="de.lukeslog.snapnow.posting.UploadService"></service>
-        <service android:name="de.lukeslog.snapnow.posting.EmailService"></service>
-        <service android:name="de.lukeslog.snapnow.main.SnapNowBackgroundService"></service>
+            android:name="de.lukeslog.snapnao.main.ReUploadActivity"/>
+        <service android:name="de.lukeslog.snapnao.posting.PostToTumblrViaMail"></service>
+        <service android:name="de.lukeslog.snapnao.main.NotificationService"></service>
+        <service android:name="de.lukeslog.snapnao.actors.NotificationActor"></service>
+        <service android:name="de.lukeslog.snapnao.posting.UploadService"></service>
+        <service android:name="de.lukeslog.snapnao.posting.EmailService"></service>
+        <service android:name="de.lukeslog.snapnao.main.SnapNowBackgroundService"></service>
           <!-- Start the Service if applicable on boot -->
    		<receiver android:name=".main.StartUp">
         <intent-filter>

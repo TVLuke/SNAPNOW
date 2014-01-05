@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
-    <string name="app_name">SNAPNOW</string>
+    <string name="app_name">SNAPNAO</string>
     <string name ="at">\@</string>
     <string name="version">Version:  </string>
     <string name="firstactivation">First Activation:  </string>

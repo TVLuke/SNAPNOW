@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
-    <string name="app_name">SNAPNOW</string>
+    <string name="app_name">SNAPNAO</string>
     <string name ="at">\@</string>
     <string name="version">Version:  </string>
     <string name="firstactivation">Erste Aktivierung:  </string>
     <string name="stats">Statistiken</string>
-    <string name="runtime">Laufzeit:  </string>
+    <string name="runtime">Laufzeit</string>
     <string name="alerts">Alarme:  </string>
 	<string name="timesincelast">Zeit seit dem letzten Alarm:  </string>
 	<string name="thismonth">Dieser Monat:  </string>
